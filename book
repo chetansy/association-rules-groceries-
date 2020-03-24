@@ -1,8 +1,7 @@
-install.packages("arules")
-library(arules)
-
 book<-read.csv("C:/Users/blacksnake/Downloads/book.csv")
 rules <- apriori(as.matrix(book),parameter=list(support=0.02, confidence = 0.5,minlen=5))
+install.packages("arules")
+library(arules)
 
 
 arules::inspect(rules)
