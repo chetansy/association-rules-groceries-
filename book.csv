@@ -8,12 +8,30 @@ rules <- apriori(as.matrix(book),parameter=list(support=0.02, confidence = 0.5,m
 arules::inspect(rules)
 
 rules.sorted<-sort(rules,by="lift")
-rules<-apriori(book,parameter = list(minlen=2,supp=0.2,conf=0.5))
-arules::inspect(rules)
+#rules<-apriori(book,parameter = list(minlen=2,supp=0.2,conf=0.5))
+arules::inspect(rules.sorted)
 inspect(head(sort(rules, by = "lift")))  
 head(quality(rules))
-install.packages("arulesViz")
+#install.packages("arulesViz")
 library(arulesViz)
-install.packages("grid")
+#install.packages("grid")
 library(grid)
-plot(rules,method = "matrix")
+plot(rules,method = "scatterplot")
+
+
+rules_n <- apriori(as.matrix(book),parameter=list(support=0.03, confidence = 0.4,minlen=12))
+arules::inspect(rules)
+
+rules.sorted_n<-sort(rules,by="lift")
+arules::inspect(rules.sorted_n)
+head(quality(rules_n))
+plot(rules_n,method="matrix")
+
+
+rules_n1<-apriori(as.matrix(book),parameter = list(support=0.05,confidence=0.4,minlen=5))
+arules::inspect(rules_n1)
+
+rules.sorted_n1<-sort(rules_n1,by="lift")
+arules::inspect(rules.sorted_n1)
+head(quality(rules_n1))
+plot(rules_n1,method="scatterplot")
