@@ -1,0 +1,32 @@
+#install.packages("arules")
+library(arules)
+
+install.packages("arulesViz")
+library(arulesViz)
+
+install.packages("grid")
+library(grid)
+
+View(my_movies)
+rules<-apriori(as.matrix(my_movies[,6:15]),parameter = list(support= 0.04,confidence= 0.6,minlen=3))
+arules::inspect(rules)
+
+rules.sorted<-sort(rules,by="lift")
+arules::inspect(rules.sorted)
+head(quality(rules))
+plot(rules,method="matrix")
+
+rules_n1 <- apriori(as.matrix(my_movies[,6:15],parameter = list(support= 0.05,confidence=0.7,minlen=5)))
+arules::inspect(rules_n1)
+rules.sorted_n1 <- sort(rules_n1,by="lift")
+arules::inspect(rules.sorted_n1)
+head(quality(rules_n1))
+plot(rules_n1, method = "scatterplot")
+
+rules_n2<- apriori(as.matrix(my_movies[,6:15],parameter = list(support = 0.07,confidence = 0.8,minlen=2)))
+arules::inspect(rules_n2)
+rules.sorted_n2<- sort(rules_n2,by= "lift")
+arules::inspect( rules.sorted_n2)
+head(quality(rules_n2))
+plot(rules_n2, method ="graph")
+
